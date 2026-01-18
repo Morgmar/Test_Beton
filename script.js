@@ -46,7 +46,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 105/148\n\n \nPrzedstawiony powyżej wzór pozwala na obliczyć doraźne\nugięcie od sprężania in przypadku dźwigara o:',
+    q: 'Pytanie 105/148\n\n \nPrzedstawiony powyżej wzór pozwala na obliczyć doraźne\nugięcie od sprężania w przypadku dźwigara o:',
     a: [
       'A.     zmiennym przekroju (dźwigar dwuspadowy) i\nprostoliniowej trasie cięgien',
       'B.     stałym przekroju i parabolicznej trasie cięgien',
@@ -56,7 +56,7 @@ const rawQuestions = [
     img: 'images/105.png',
   },
   {
-    q: 'Pytanie 106/148\nWartość straty od tarcia in kanale kablowym zależy od:',
+    q: 'Pytanie 106/148\nWartość straty od tarcia w kanale kablowym zależy od:',
     a: [
       'A.     charakterystyka geometrycznych przekroju',
       'B.     suma kątów zakrzywienia trasy cięgna',
@@ -87,7 +87,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 109/148\nProjektując niezarysowaną belkę sprężoną (kategorii 1a lub\n1b) można dopuścić niespełnienie warunku pojawienia się rys prostopadłych do\nelementu in stadium:',
+    q: 'Pytanie 109/148\nProjektując niezarysowaną belkę sprężoną (kategorii 1a lub\n1b) można dopuścić niespełnienie warunku pojawienia się rys prostopadłych do\nelementu w stadium:',
     a: [
       'A.     montażu',
       'B.     eksploatacji',
@@ -108,15 +108,15 @@ const rawQuestions = [
   {
     q: 'Pytanie 111/148\nSprężanie odcinkowe zbiorników walcowych wiąże się z\nkoniecznością konstruowania lokalnych pogrubień (pilastrów) celem umożliwienia\nkotwienia cięgien. Jest to przyczyną powstawania dodatkowych:',
     a: [
-      'A.     momentów zginających in powłoce',
-      'B.     sił równoleżnikowych in powłoce',
-      'C.    sił południkowych in powłoce',
+      'A.     momentów zginających w powłoce',
+      'B.     sił równoleżnikowych w powłoce',
+      'C.    sił południkowych w powłoce',
     ],
     c: [0],
     img: '',
   },
   {
-    q: 'Pytanie 112/148\nPrzy sprężaniu kablami ze splotów, in zakotwieniu czynnym\nstosuje się zakotwienia:',
+    q: 'Pytanie 112/148\nPrzy sprężaniu kablami ze splotów, w zakotwieniu czynnym\nstosuje się zakotwienia:',
     a: [
       'A.     z zastosowaniem stożkowych szczęk dwu- lub\ntrójdzielnych  ',
       'B.     gwintowe (nagwintowane cięgno, nakrętka) ',
@@ -146,7 +146,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 115/148\nObliczając strefę zakotwień in elemencie strunobetonowym,\nokreśla się (zgodnie z EC2) m.in. długość zwaną długością:',
+    q: 'Pytanie 115/148\nObliczając strefę zakotwień w elemencie strunobetonowym,\nokreśla się (zgodnie z EC2) m.in. długość zwaną długością:',
     a: [
       'A.     dyspraksji',
       'B.     dysleksji',
@@ -160,7 +160,7 @@ const rawQuestions = [
   {
     q: 'Pytanie 116/148\nW rurach o bardzo dużych średnicach stosuje się:',
     a: [
-      'A.     kable umieszczone in grubości ściany rury',
+      'A.     kable umieszczone w grubości ściany rury',
       'B.     kable umieszczone na zewnętrznej powierzchni\nściany rury',
     ],
     c: [1],
@@ -169,8 +169,8 @@ const rawQuestions = [
   {
     q: 'Pytanie 117/148\nW rurach o bardzo dużych średnicach stosuje się:',
     a: [
-      'A.     kable kotwione in specjalnych pilastrach',
-      'B.     kable kotwione in specjalnych gniazdach',
+      'A.     kable kotwione w specjalnych pilastrach',
+      'B.     kable kotwione w specjalnych gniazdach',
     ],
     c: [0],
     img: '',
@@ -185,10 +185,10 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 119/148\nW przypadku konstrukcji kablobetonowych przy nowoczesnych\nzakotwieniach ze stalowymi odlewami bloków kotwiących, umieszczanymi in betonie\nelementu sięgającymi in głąb na kilkadziesiąt centymetrów wyposażonymi in\npośrednie kołnierze dociskowe konstruując zbrojenie strefy zakotwień:',
+    q: 'Pytanie 119/148\nW przypadku konstrukcji kablobetonowych przy nowoczesnych\nzakotwieniach ze stalowymi odlewami bloków kotwiących, umieszczanymi w betonie\nelementu sięgającymi w głąb na kilkadziesiąt centymetrów wyposażonymi w\npośrednie kołnierze dociskowe konstruując zbrojenie strefy zakotwień:',
     a: [
       'A.     można wybiórczo stosować zalecenia producenta\nzakotwień',
-      'B.     należy in pełni bazować na zaleceniach producenta\nzakotwień',
+      'B.     należy w pełni bazować na zaleceniach producenta\nzakotwień',
       'C.    przede wszystkim należy samodzielnie\nprzeprowadzić stosowne obliczenia, opcjonalnie stosując wybrane zalecenia\nproducenta zakotwień',
       'D.    należy traktować zalecenia producenta zakotwień\njako jedną z możliwych opcji',
     ],
@@ -206,12 +206,12 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 121/148\nDo strat siły sprężającej in konstrukcjach strunobetonowych\nzalicza się:',
+    q: 'Pytanie 121/148\nDo strat siły sprężającej w konstrukcjach strunobetonowych\nzalicza się:',
     a: [
       'A.     straty od różnic temperatury',
       'B.     straty od częściowej relaksacji stali',
-      'C.    straty od poślizgu in uchwytach technologicznych',
-      'D.    straty od poślizgu in zakotwieniach',
+      'C.    straty od poślizgu w uchwytach technologicznych',
+      'D.    straty od poślizgu w zakotwieniach',
     ],
     c: [0, 1, 2],
     img: '',
@@ -238,7 +238,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 124/148\nPrzy sprężaniu kablami prętowymi, in zakotwieniu czynnym\nstosuje się zakotwienia:',
+    q: 'Pytanie 124/148\nPrzy sprężaniu kablami prętowymi, w zakotwieniu czynnym\nstosuje się zakotwienia:',
     a: [
       'A.     z zastosowaniem stożkowych szczęk dwu- lub\ntrójdzielnych ',
       'B.     gwintowe (nagwintowane cięgno, nakrętka)',
@@ -247,7 +247,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 125/148\nSprężanie z wykorzystaniem betonu ekspansywnego stosuje się\nprzede wszystkim przy masywnych konstrukcjach, gdzie naprężenia in betonie:',
+    q: 'Pytanie 125/148\nSprężanie z wykorzystaniem betonu ekspansywnego stosuje się\nprzede wszystkim przy masywnych konstrukcjach, gdzie naprężenia w betonie:',
     a: ['A.     nie muszą być duże', 'B.     muszą być duże'],
     c: [0],
     img: '',
@@ -273,17 +273,17 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 128/148\n\nPrzedstawiony powyżej wzór pozwala obliczyć doraźne ugięcie\nod sprężania in przypadku dźwigara o: ',
+    q: 'Pytanie 128/148\n\nPrzedstawiony powyżej wzór pozwala obliczyć doraźne ugięcie\nod sprężania w przypadku dźwigara o: ',
     a: [
       'A.     stałym przekroju i parabolicznej trasie cięgien',
       'B.     zmiennym przekroju i prostoliniowej trasie\ncięgien ułożonych wzdłuż górnej półki',
-      'C.    stałym przekroju i cięgnach ułożonych in osi\nobojętnej elementu na całej jego długości',
+      'C.    stałym przekroju i cięgnach ułożonych w osi\nobojętnej elementu na całej jego długości',
     ],
     c: [0],
     img: 'images/128.png',
   },
   {
-    q: 'Pytanie 129/148\nJeśli in trakcie sprawdzania warunku zarysowania (rysy\nprostopadłe) in stadium montażu dźwigara nie spełniono warunku (rysy się\nnie pojawią), to in stadium eksploatacji warunek:',
+    q: 'Pytanie 129/148\nJeśli w trakcie sprawdzania warunku zarysowania (rysy\nprostopadłe) w stadium montażu dźwigara nie spełniono warunku (rysy się\nnie pojawią), to w stadium eksploatacji warunek:',
     a: [
       'A.     na pewno się sprawdził (rysy się nie pojawią)',
       'B.     na pewno się nie sprawdził (rysy się pojawią)',
@@ -293,7 +293,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 130/148\nWeryfikując stan graniczny nośności in stadium realizacji\n(sprężania dźwigara przyjmuje się odpowiednio powiększoną siłę sprężającą:',
+    q: 'Pytanie 130/148\nWeryfikując stan graniczny nośności w stadium realizacji\n(sprężania dźwigara przyjmuje się odpowiednio powiększoną siłę sprężającą:',
     a: [
       'A.     po stratach technologicznych i doraźnych',
       'B.     początkową',
@@ -325,7 +325,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 134/148\nDo strat siły sprężającej in konstrukcjach kablobetonowych\nzalicza się:',
+    q: 'Pytanie 134/148\nDo strat siły sprężającej w konstrukcjach kablobetonowych\nzalicza się:',
     a: [
       'A.     straty od odkształceń sprężystych betonu',
       'B.     straty opóźnione od relaksacji stali odraz\nskurczu i pełzania betonu',
@@ -335,7 +335,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 135/148\nSprawdzając warunek pojawienia się rys prostopadłych do os\nelementu, naprężenia in skrajnych włóknach górnych przekroju sprawdza się in\nstadium:',
+    q: 'Pytanie 135/148\nSprawdzając warunek pojawienia się rys prostopadłych do os\nelementu, naprężenia w skrajnych włóknach górnych przekroju sprawdza się w\nstadium:',
     a: [
       'A.     stadium realizacji (sprężania)',
       'B.     w stadium montażu',
@@ -345,7 +345,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 136/148\nZaleca się, aby in konstrukcjach strunobetonowych cięgna\nrozmieszczone były:',
+    q: 'Pytanie 136/148\nZaleca się, aby w konstrukcjach strunobetonowych cięgna\nrozmieszczone były:',
     a: [
       'A.     w układzie ortogonalnym',
       'B.     tak, by środek ciężkości cięgien pokrywał się ze\nśrodkiem ciężkości półki dolnej (w miarę możliwości)',
@@ -355,7 +355,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 137/148\nNawijarka karuzelowa to takie urządzenie, in którym:',
+    q: 'Pytanie 137/148\nNawijarka karuzelowa to takie urządzenie, w którym:',
     a: [
       'A.     urządzenie napędowe i naciągowe umieszczone na\njednej platformie',
       'B.     obsługa sterująca nawijaniem przebywa na\nplatformie',
@@ -386,7 +386,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 141/148\nDługość, na której siła sprężająca zostaje in pełni\nprzekazana z cięgien na beton (w elementach strunobetonowych), to długość:',
+    q: 'Pytanie 141/148\nDługość, na której siła sprężająca zostaje w pełni\nprzekazana z cięgien na beton (w elementach strunobetonowych), to długość:',
     a: [
       'A.     dyspersji',
       'B.     dystrybucji',
@@ -435,13 +435,13 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 146/148\nStrata od odkształceń sprężystych betonu in kablobetonie jest\nprocentowo... niż in strunobetonie',
+    q: 'Pytanie 146/148\nStrata od odkształceń sprężystych betonu w kablobetonie jest\nprocentowo... niż w strunobetonie',
     a: ['A.     mniejsza', 'B.     większa', 'C.    taka sama'],
     c: [0],
     img: '',
   },
   {
-    q: 'Pytanie 147/148\nObliczając strefę zakotwień in elemencie strunobetonowym,\nokreśla się (zgodnie z EC2) m in. długość zwaną długością',
+    q: 'Pytanie 147/148\nObliczając strefę zakotwień w elemencie strunobetonowym,\nokreśla się (zgodnie z EC2) m in. długość zwaną długością',
     a: [
       'A.     transmisji',
       'B.     transferu',
