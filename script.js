@@ -1,4 +1,3 @@
-// KOMPLETNA BAZA PYTAŃ (1-148)
 const rawQuestions = [
   {
     q: 'Pytanie 1: Przy sprężaniu z wykorzystaniem ekspansji betonu:',
@@ -992,7 +991,7 @@ const rawQuestions = [
     a: [
       'metodą nawijania kabli',
       'tylko za pomocą kabli',
-      'metodą chuja w dupie',
+      'metodą mechaniczną',
     ],
     c: [0],
   },
@@ -1083,7 +1082,7 @@ const rawQuestions = [
   },
   {
     q: 'Pytanie 135: Rysy prostopadłe we włóknach GÓRNYCH sprawdza się w stadium:',
-    a: ['realizacji (sprężania)', 'montażu', 'eksploatacji'],
+    a: ['realizacji (sprężenia)', 'montażu', 'eksploatacji'],
     c: [0],
   },
   {
@@ -1176,7 +1175,6 @@ const rawQuestions = [
   },
 ];
 
-// FUNKCJA MIESZAJĄCA (Fisher-Yates)
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -1195,10 +1193,20 @@ const questionArea = document.getElementById('question-area');
 const nextBtn = document.getElementById('next-btn');
 const correctSpan = document.getElementById('correct-count');
 const wrongSpan = document.getElementById('wrong-count');
+const scoreSpan = document.getElementById('score-percentage'); // Dodaj w HTML element o tym ID
 
 function updateStats() {
   correctSpan.innerText = correctCount;
   wrongSpan.innerText = wrongCount;
+
+  // Obliczanie procentu na bieżąco
+  const totalAnswered = correctCount + wrongCount;
+  const percentage =
+    totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+
+  if (scoreSpan) {
+    scoreSpan.innerText = percentage + '%';
+  }
 }
 
 function loadQuestion() {
@@ -1215,7 +1223,6 @@ function loadQuestion() {
 
   qData.a.forEach((ans, i) => {
     const div = document.createElement('div');
-    div.className = 'option-wrapper';
     div.id = `opt-container-${i}`;
     div.style.cssText =
       'padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.3s;';
@@ -1280,18 +1287,12 @@ nextBtn.onclick = () => {
     if (currentIdx < questions.length) {
       loadQuestion();
     } else {
-      const score = Math.round((correctCount / questions.length) * 100);
+      const finalScore = Math.round((correctCount / questions.length) * 100);
       questionArea.innerHTML = `
                 <div style="text-align: center; padding: 40px;">
                     <h2>Test zakończony!</h2>
-                    <p style="font-size: 1.5rem; margin: 20px 0;">Twój wynik: ${correctCount} / ${
-        questions.length
-      } (${score}%)</p>
-                    <p>${
-                      score >= 50
-                        ? '🎉 Gratulacje! Całkiem nieźle.'
-                        : '👨‍🏫 Warto jeszcze trochę poćwiczyć.'
-                    }</p>
+                    <p style="font-size: 2rem; margin: 20px 0; font-weight: bold;">Wynik końcowy: ${finalScore}%</p>
+                    <p>Poprawne: ${correctCount} | Błędne: ${wrongCount}</p>
                 </div>`;
       nextBtn.innerText = 'Zacznij od nowa';
       nextBtn.onclick = () => location.reload();
