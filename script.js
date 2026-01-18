@@ -218,11 +218,7 @@ const rawQuestions = [
   },
   {
     q: 'Pytanie 122/148\nSprężanie zbiorników walcowych wykonuje się:',
-    a: [
-      'A.     metodą nawijania kabli',
-      'B.     tylko za pomocą kabli',
-      'C.    metodą chuja w dupie',
-    ],
+    a: ['A.     metodą nawijania kabli', 'B.     tylko za pomocą kabli'],
     c: [0],
     img: '',
   },
