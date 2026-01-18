@@ -551,7 +551,7 @@ const rawQuestions = [
     c: [0],
   },
   {
-    q: 'Pytanie 66: W strunobetonie cięgna są zakotwione w elementach oporowych na czas:',
+    q: 'Pytanie 66: W strunobetonone cięgna są zakotwione w elementach oporowych na czas:',
     a: ['ustawienia form', 'betonowania i twardnienia', '7 dni', '24 godziny'],
     c: [1],
   },
@@ -1193,13 +1193,13 @@ const questionArea = document.getElementById('question-area');
 const nextBtn = document.getElementById('next-btn');
 const correctSpan = document.getElementById('correct-count');
 const wrongSpan = document.getElementById('wrong-count');
-const scoreSpan = document.getElementById('score-percentage'); // Dodaj w HTML element o tym ID
+const scoreSpan = document.getElementById('score-percentage');
 
 function updateStats() {
   correctSpan.innerText = correctCount;
   wrongSpan.innerText = wrongCount;
 
-  // Obliczanie procentu na bieżąco
+  // OBLICZANIE PROCENTU: Poprawne / Suma udzielonych odpowiedzi
   const totalAnswered = correctCount + wrongCount;
   const percentage =
     totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
@@ -1215,9 +1215,7 @@ function loadQuestion() {
   const qData = questions[currentIdx];
 
   questionArea.innerHTML = `
-        <div style="color: #666; margin-bottom: 10px;">Pytanie ${
-          currentIdx + 1
-        } z ${questions.length}</div>
+        <div style="color: #666; margin-bottom: 10px;">Pytanie ${currentIdx + 1} z ${questions.length}</div>
         <h3 style="margin-bottom: 20px;">${qData.q}</h3>
     `;
 
@@ -1266,6 +1264,8 @@ nextBtn.onclick = () => {
     } else {
       wrongCount++;
     }
+
+    // Wywołujemy aktualizację statystyk ZARAZ po zmianie licznika
     updateStats();
 
     checkboxes.forEach((cb, i) => {
@@ -1291,7 +1291,7 @@ nextBtn.onclick = () => {
       questionArea.innerHTML = `
                 <div style="text-align: center; padding: 40px;">
                     <h2>Test zakończony!</h2>
-                    <p style="font-size: 2rem; margin: 20px 0; font-weight: bold;">Wynik końcowy: ${finalScore}%</p>
+                    <p style="font-size: 2rem; margin: 20px 0; font-weight: bold;">Skuteczność: ${finalScore}%</p>
                     <p>Poprawne: ${correctCount} | Błędne: ${wrongCount}</p>
                 </div>`;
       nextBtn.innerText = 'Zacznij od nowa';
