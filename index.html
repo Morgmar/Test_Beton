@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test Konstrukcje Sprężone</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #eee;
+        padding: 20px;
+        margin: 0;
+      }
+      #quiz-container {
+        background: #fff;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .option {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: block;
+        cursor: pointer;
+      }
+      .option:hover {
+        background: #f9f9f9;
+      }
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+
+      /* Styl okienka statystyk po prawej na dole */
+      #stats-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #2c3e50;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        min-width: 220px;
+        font-size: 15px;
+      }
+      #stats-container p {
+        margin: 8px 0;
+        border-bottom: 1px solid #34495e;
+        padding-bottom: 5px;
+      }
+      #stats-container span {
+        font-weight: bold;
+        float: right;
+        margin-left: 10px;
+      }
+      #correct-count {
+        color: #2ecc71;
+      }
+      #wrong-count {
+        color: #e74c3c;
+      }
+      #total-score {
+        color: #f1c40f;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quiz-container">
+      <div id="question-area"></div>
+      <button id="next-btn">Dalej</button>
+    </div>
+
+    <div id="stats-container">
+      <p>Poprawne (X): <span id="correct-count">0</span></p>
+      <p>Błędne (Y): <span id="wrong-count">0</span></p>
+      <p>Wynik (Z): <span id="total-score">0</span></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
