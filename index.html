@@ -1,112 +1,223 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
-<head>
+  <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Konstrukcje Sprężone</title>
     <style>
-        body {
-            font-family: sans-serif;
-            background: #eee;
-            padding: 20px;
-            margin: 0;
-        }
-        #quiz-container {
-            background: #fff;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+      body {
+        font-family: sans-serif;
+        background: #eee;
+        padding: 20px;
+        margin: 0;
+      }
 
-        /* NOWY STYL KAFELKA ODPOWIEDZI */
-        .answer-card {
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-        }
+      #quiz-container {
+        background: #fff;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-        /* Efekt najechania myszką na kafelek */
-        .answer-card:hover {
-            background-color: #f8f9fa;
-            border-color: #bbb;
-        }
+      /* Styl sekcji TIMERA */
+      #timer-container {
+        text-align: center;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+      #timer-label {
+        font-size: 12px;
+        color: #666;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      #timer-display {
+        font-size: 28px;
+        font-weight: bold;
+        color: #e74c3c;
+        font-family: monospace;
+      }
 
-        /* Blokada kliknięć wewnątrz elementów kafelka (wszystko obsługuje div.onclick) */
-        .answer-card input, .answer-card span {
-            pointer-events: none;
-        }
+      /* Styl obszaru pytania */
+      #question-area {
+        margin-bottom: 20px;
+      }
 
-        button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
+      /* STYL KAFELKA ODPOWIEDZI (To o co pytałeś) */
+      .answer-card {
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+      }
 
-        /* Styl okienka statystyk */
+      /* Efekt najechania myszką na kafelek */
+      .answer-card:hover {
+        background-color: #007bff !important;
+        border-color: #bbb !important;
+      }
+
+      /* Zablokowanie pointer-events, aby div przejmował kliknięcie */
+      .answer-card input,
+      .answer-card span {
+        pointer-events: none;
+      }
+
+      /* Styl przycisku */
+      button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+
+      /* Styl okienka statystyk w rogu */
+      #stats-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #2c3e50;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        min-width: 220px;
+        font-size: 15px;
+        z-index: 1000;
+      }
+      #stats-container p {
+        margin: 8px 0;
+        border-bottom: 1px solid #34495e;
+        padding-bottom: 5px;
+      }
+      #stats-container span {
+        font-weight: bold;
+        float: right;
+        margin-left: 10px;
+      }
+      #correct-count {
+        color: #2ecc71;
+      }
+      #wrong-count {
+        color: #e74c3c;
+      }
+      #score-percentage {
+        color: #f1c40f;
+      }
+
+      /* Responsywność dla telefonów */
+      @media (max-width: 800px) {
         #stats-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            min-width: 220px;
-            font-size: 15px;
+          position: static;
+          margin: 20px auto;
+          max-width: 600px;
         }
-        #stats-container p {
-            margin: 8px 0;
-            border-bottom: 1px solid #34495e;
-            padding-bottom: 5px;
-        }
-        #stats-container span {
-            font-weight: bold;
-            float: right;
-            margin-left: 10px;
-        }
-        #correct-count { color: #2ecc71; }
-        #wrong-count { color: #e74c3c; }
-        #score-percentage { color: #f1c40f; }
-
-        /* Media query dla urządzeń mobilnych - statystyki na górze, gdy mało miejsca */
-        @media (max-width: 800px) {
-            #stats-container {
-                position: static;
-                margin: 20px auto;
-                max-width: 600px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="quiz-container">
-        <div id="question-area"></div>
-        <button id="next-btn">Dalej</button>
+      <div id="timer-container">
+        <span id="timer-label">Pozostały czas</span>
+        <span id="timer-display">60s</span>
+      </div>
+      <div
+        id="exam-sidebar"
+        style="
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          width: 220px;
+          z-index: 1000;
+        "
+      >
+        <div
+          class="info-card"
+          style="
+            background: #e67e22;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            font-weight: bold;
+          "
+        >
+          📅 Termin zerowy:<br />
+          <span style="font-size: 1.1rem; display: block; margin-top: 5px"
+            >28.01 godz. 12:00</span
+          >
+        </div>
+
+        <div
+          class="info-card"
+          style="
+            background: #2980b9;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            font-weight: bold;
+          "
+        >
+          📝 Termin podstawowy:<br />
+          <span style="font-size: 1rem; display: block; margin-top: 5px"
+            >08.02 (niedziela)</span
+          >
+          <span style="font-size: 0.9rem; font-weight: normal; display: block"
+            >11:30 - 15:00, Aula A</span
+          >
+        </div>
+
+        <div
+          class="info-card"
+          style="
+            background: #c0392b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+          "
+        >
+          🔄 Termin poprawkowy:<br />
+          <span style="font-size: 1rem; display: block; margin-top: 5px"
+            >15.02 (niedziela)</span
+          >
+          <span style="font-size: 0.9rem; font-weight: normal; display: block"
+            >11:30 - 15:00, Aula A</span
+          >
+        </div>
+      </div>
+      <div id="question-area"></div>
+
+      <button id="next-btn">Dalej</button>
     </div>
 
     <div id="stats-container">
-        <p>Poprawne: <span id="correct-count">0</span></p>
-        <p>Błędne: <span id="wrong-count">0</span></p>
-        <p>Wynik: <span id="score-percentage">0%</span></p>
+      <p>Poprawne: <span id="correct-count">0</span></p>
+      <p>Błędne: <span id="wrong-count">0</span></p>
+      <p>Wynik: <span id="score-percentage">0%</span></p>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
