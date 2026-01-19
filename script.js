@@ -1518,9 +1518,16 @@ function loadQuestion() {
   qData.a.forEach((ans, i) => {
     const div = document.createElement('div');
     div.id = `opt-container-${i}`;
-    div.style.cssText =
-      'padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.3s; display: flex; align-items: center;';
+    // div.style.cssText =
+    //   'padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.3s; display: flex; align-items: center;';
+    // USUNĘLIŚMY cssText, ZAMIAST TEGO DODAJEMY KLASĘ:
+    div.className = 'answer-card';
 
+    div.innerHTML = `
+        <input type="checkbox" value="${i}" class="ans-checkbox" 
+               style="margin-right: 15px; transform: scale(1.2); pointer-events: none;">
+        <span style="font-size: 1.05rem; pointer-events: none;">${ans}</span>
+    `;
     // Usunąłem label, aby nie dublować kliknięć. Używamy spanu.
     div.innerHTML = `
         <input type="checkbox" value="${i}" class="ans-checkbox" 
@@ -1546,6 +1553,7 @@ function loadQuestion() {
 
     questionArea.appendChild(div);
   });
+  startTimer();
 }
 
 nextBtn.onclick = () => {
@@ -1561,6 +1569,7 @@ nextBtn.onclick = () => {
   }
 
   if (!isChecked) {
+    clearInterval(timerInterval); // Zatrzymujemy odliczanie po kliknięciu "Sprawdź"
     const isCorrect =
       selected.length === correct.length &&
       selected.every(val => correct.includes(val));
@@ -1605,5 +1614,65 @@ nextBtn.onclick = () => {
     }
   }
 };
+let timerInterval; // Zmienna przechowująca interwał odliczania
+const TIME_LIMIT = 60; // Limit czasu w sekundach
 
+function startTimer() {
+  let timeLeft = TIME_LIMIT;
+  const display = document.getElementById('timer-display');
+  display.innerText = timeLeft + 's';
+  display.style.color = '#e74c3c'; // Reset koloru na czerwony/standardowy
+
+  // Czyścimy stary interwał, jeśli istniał
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    display.innerText = timeLeft + 's';
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timeIsUp(); // Wywołujemy funkcję końca czasu
+    }
+  }, 1000);
+}
+
+function timeIsUp() {
+  if (isChecked) return;
+
+  isChecked = true;
+  clearInterval(timerInterval); // Zatrzymujemy timer
+
+  wrongCount++;
+  updateStats();
+
+  const qData = questions[currentIdx];
+  const correctAnswers = qData.c; // Tablica z indeksami poprawnych odp.
+
+  // Przechodzimy przez wszystkie kafelki, aby pokazać poprawne odpowiedzi
+  qData.a.forEach((ans, i) => {
+    const div = document.getElementById(`opt-container-${i}`);
+    if (div) {
+      if (correctAnswers.includes(i)) {
+        // Podświetlamy poprawną odpowiedź na zielono
+        div.style.backgroundColor = '#d4edda';
+        div.style.borderColor = '#28a745';
+        div.style.color = '#155724';
+        div.style.fontWeight = 'bold';
+      } else {
+        // Resztę lekko wygaszamy
+        div.style.opacity = '0.6';
+      }
+    }
+  });
+
+  // Informacja dla użytkownika
+  questionArea.innerHTML += `
+        <div style="color: #e74c3c; font-weight: bold; text-align: center; margin-top: 20px; padding: 10px; border: 2px dashed #e74c3c; border-radius: 8px;">
+            CZAS MINĄŁ! <br> <span style="color: #28a745;">Zielonym kolorem zaznaczono poprawne odpowiedzi.</span>
+        </div>
+    `;
+
+  nextBtn.innerText = 'Następne pytanie »';
+}
 loadQuestion();
