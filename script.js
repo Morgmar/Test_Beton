@@ -1519,19 +1519,29 @@ function loadQuestion() {
     const div = document.createElement('div');
     div.id = `opt-container-${i}`;
     div.style.cssText =
-      'padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.3s;';
+      'padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.3s; display: flex; align-items: center;';
 
+    // Usunąłem label, aby nie dublować kliknięć. Używamy spanu.
     div.innerHTML = `
-            <label style="display: flex; align-items: center; cursor: pointer; width: 100%;">
-                <input type="checkbox" value="${i}" class="ans-checkbox" style="margin-right: 15px; transform: scale(1.2);">
-                <span style="font-size: 1.05rem;">${ans}</span>
-            </label>
-        `;
+        <input type="checkbox" value="${i}" class="ans-checkbox" 
+               style="margin-right: 15px; transform: scale(1.2); pointer-events: none;">
+        <span style="font-size: 1.05rem; pointer-events: none;">${ans}</span>
+    `;
 
-    div.onclick = e => {
+    div.onclick = () => {
       if (isChecked) return;
+
       const cb = div.querySelector('input');
-      if (e.target !== cb) cb.checked = !cb.checked;
+      cb.checked = !cb.checked; // Ręcznie przełączamy stan
+
+      // Opcjonalne: Wizualne podświetlenie kafelka po zaznaczeniu
+      if (cb.checked) {
+        div.style.backgroundColor = '#eef6ff';
+        div.style.borderColor = '#007bff';
+      } else {
+        div.style.backgroundColor = '#fff';
+        div.style.borderColor = '#ddd';
+      }
     };
 
     questionArea.appendChild(div);
