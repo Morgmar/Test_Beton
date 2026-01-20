@@ -170,6 +170,24 @@
       </div>
       <div id="question-area"></div>
       <button id="next-btn">Dalej</button>
+      <button
+        id="open-wrong-btn"
+        style="
+          background: #e74c3c;
+          color: white;
+          border: none;
+          padding: 15px 20px; /* Takie same wymiary jak główny przycisk */
+          border-radius: 5px;
+          cursor: pointer;
+          width: 100%; /* Szerokość na 100% kontenera */
+          font-size: 16px;
+          margin-top: 15px; /* Odstęp od przycisku powyżej */
+          display: none; /* Pojawi się tylko przy błędach */
+          font-weight: bold;
+        "
+      >
+        Powtórz błędy (<span id="wrong-count-badge">0</span>)
+      </button>
     </div>
 
     <div id="exam-sidebar">
@@ -207,6 +225,62 @@
       <p>Wynik: <span id="score-percentage">0%</span></p>
     </div>
 
+    <div
+      id="wrong-modal"
+      style="
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        overflow-y: auto;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          max-width: 600px;
+          margin: 40px auto;
+          padding: 25px;
+          border-radius: 12px;
+          position: relative;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        "
+      >
+        <span
+          id="close-modal"
+          style="
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 35px;
+            cursor: pointer;
+            color: #666;
+          "
+          >&times;</span
+        >
+        <div id="modal-question-area"></div>
+        <button
+          id="modal-next-btn"
+          style="
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+          "
+        >
+          Sprawdź odpowiedź
+        </button>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

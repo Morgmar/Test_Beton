@@ -1,3 +1,4 @@
+let wrongQuestionsPool = [];
 const rawQuestions = [
   {
     q: 'Pytanie 1/148\nSprężanie kablobetonowe stosuje się najczęściej:',
@@ -1473,7 +1474,13 @@ const nextBtn = document.getElementById('next-btn');
 const correctSpan = document.getElementById('correct-count');
 const wrongSpan = document.getElementById('wrong-count');
 const scoreSpan = document.getElementById('score-percentage');
-
+function resetMainStats() {
+  correctCount = 0;
+  wrongCount = 0;
+  // Jeśli używasz procentów w statystykach, updateStats wszystko przeliczy
+  updateStats();
+  console.log('Statystyki testu zostały zresetowane po poprawieniu błędów.');
+}
 function updateStats() {
   correctSpan.innerText = correctCount;
   wrongSpan.innerText = wrongCount;
@@ -1561,7 +1568,8 @@ nextBtn.onclick = () => {
   const selected = Array.from(checkboxes)
     .filter(cb => cb.checked)
     .map(cb => parseInt(cb.value));
-  const correct = questions[currentIdx].c;
+  const qData = questions[currentIdx]; // Pobieramy dane aktualnego pytania
+  const correct = qData.c;
 
   if (selected.length === 0 && !isChecked) {
     alert('Wybierz odpowiedź!');
@@ -1578,6 +1586,13 @@ nextBtn.onclick = () => {
       correctCount++;
     } else {
       wrongCount++;
+
+      // --- NOWA LOGIKA PULI BŁĘDÓW (Dodana bez usuwania reszty) ---
+      if (!wrongQuestionsPool.some(q => q.q === qData.q)) {
+        wrongQuestionsPool.push(qData);
+        updateWrongBadge(); // Ta funkcja musi być zdefiniowana w Twoim kodzie
+      }
+      // ----------------------------------------------------------
     }
 
     // Wywołujemy aktualizację statystyk ZARAZ po zmianie licznika
@@ -1676,3 +1691,122 @@ function timeIsUp() {
   nextBtn.innerText = 'Następne pytanie »';
 }
 loadQuestion();
+// --- LOGIKA OBSŁUGI MODALA I POWTÓREK ---
+
+const modal = document.getElementById('wrong-modal');
+const openModalBtn = document.getElementById('open-wrong-btn');
+const closeModal = document.getElementById('close-modal');
+const modalQuestionArea = document.getElementById('modal-question-area');
+const modalNextBtn = document.getElementById('modal-next-btn');
+
+let currentModalIdx = 0;
+let isModalChecked = false;
+
+// Funkcja aktualizująca czerwony przycisk (pokazuje/ukrywa i odświeża licznik)
+function updateWrongBadge() {
+  const badge = document.getElementById('wrong-count-badge');
+  const btn = document.getElementById('open-wrong-btn');
+  if (badge && btn) {
+    badge.innerText = wrongQuestionsPool.length;
+    btn.style.display = wrongQuestionsPool.length > 0 ? 'block' : 'none';
+  }
+}
+
+// Otwieranie okna powtórek
+openModalBtn.onclick = () => {
+  if (wrongQuestionsPool.length === 0) return;
+  currentModalIdx = 0;
+  modal.style.display = 'block';
+  loadModalQuestion();
+};
+
+// Zamykanie okna
+closeModal.onclick = () => {
+  modal.style.display = 'none';
+};
+
+// Ładowanie pytania do okna powtórek
+function loadModalQuestion() {
+  isModalChecked = false;
+  modalNextBtn.innerText = 'Sprawdź odpowiedź';
+  modalNextBtn.style.background = '#27ae60';
+  const qData = wrongQuestionsPool[currentModalIdx];
+
+  modalQuestionArea.innerHTML = `
+        <div style="color: #e74c3c; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+            TRYB POWTÓRKI: Zostało ${wrongQuestionsPool.length} pytań
+        </div>
+        <h3 style="margin-bottom: 20px;">${qData.q}</h3>
+    `;
+
+  qData.a.forEach((ans, i) => {
+    const div = document.createElement('div');
+    div.className = 'answer-card'; // Używamy Twoich stylów kafelków
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.padding = '12px';
+    div.style.margin = '8px 0';
+    div.style.border = '1px solid #ddd';
+    div.style.borderRadius = '8px';
+    div.style.cursor = 'pointer';
+
+    div.innerHTML = `
+            <input type="checkbox" value="${i}" class="modal-cb" style="margin-right: 15px; pointer-events: none;">
+            <span style="pointer-events: none;">${ans}</span>
+        `;
+
+    div.onclick = () => {
+      if (isModalChecked) return;
+      const cb = div.querySelector('input');
+      cb.checked = !cb.checked;
+      div.style.backgroundColor = cb.checked ? '#eef6ff' : '#fff';
+    };
+    modalQuestionArea.appendChild(div);
+  });
+}
+
+// Logika przycisku wewnątrz okna powtórek
+modalNextBtn.onclick = () => {
+  const qData = wrongQuestionsPool[currentModalIdx];
+
+  if (!isModalChecked) {
+    const selected = Array.from(document.querySelectorAll('.modal-cb'))
+      .filter(cb => cb.checked)
+      .map(cb => parseInt(cb.value));
+
+    const isCorrect =
+      selected.length === qData.c.length &&
+      selected.every(val => qData.c.includes(val));
+
+    if (isCorrect) {
+      // DOBRA ODPOWIEDŹ -> usuwamy z listy błędów
+      wrongQuestionsPool.splice(currentModalIdx, 1);
+      modalQuestionArea.innerHTML += `<div style="color: #27ae60; font-weight: bold; margin-top: 15px; text-align: center;">✔ Dobrze! Pytanie usunięte z listy błędów.</div>`;
+      if (currentModalIdx >= wrongQuestionsPool.length) currentModalIdx = 0;
+    } else {
+      // BŁĄD -> pytanie zostaje, idziemy do następnego w kolejce
+      currentModalIdx = (currentModalIdx + 1) % wrongQuestionsPool.length;
+      modalQuestionArea.innerHTML += `<div style="color: #e74c3c; font-weight: bold; margin-top: 15px; text-align: center;">✖ Nadal błąd! Pytanie wróci do Ciebie w tej pętli.</div>`;
+    }
+
+    isModalChecked = true;
+    modalNextBtn.innerText = 'Następne';
+    modalNextBtn.style.background = '#3498db';
+    updateWrongBadge();
+  } else {
+    if (wrongQuestionsPool.length === 0) {
+      modal.style.display = 'none';
+
+      // --- NOWA LOGIKA RESETU ---
+      resetMainStats();
+      // --------------------------
+
+      alert(
+        'Gratulacje! Wszystkie błędy poprawione. Statystyki główne zostały wyzerowane.',
+      );
+    } else {
+      if (currentModalIdx >= wrongQuestionsPool.length) currentModalIdx = 0;
+      loadModalQuestion();
+    }
+  }
+};
