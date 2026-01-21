@@ -1759,6 +1759,12 @@ closeModal.onclick = () => {
 // Ładowanie pytania do okna powtórek
 function loadModalQuestion() {
   isModalChecked = false;
+  if (modalHintBtn) {
+    modalHintBtn.innerText = 'Pokaż poprawne odpowiedzi (Podpowiedź)';
+    modalHintBtn.disabled = false;
+    modalHintBtn.style.opacity = '1';
+    modalHintBtn.style.background = '#f39c12';
+  }
   modalNextBtn.innerText = 'Sprawdź odpowiedź';
   modalNextBtn.style.background = '#27ae60';
   const qData = wrongQuestionsPool[currentModalIdx];
