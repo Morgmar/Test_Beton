@@ -1477,8 +1477,10 @@ const scoreSpan = document.getElementById('score-percentage');
 function resetMainStats() {
   correctCount = 0;
   wrongCount = 0;
+  currentIdx = 0; // Resetujemy indeks pytania do 0 (pierwsze pytanie)
   // Jeśli używasz procentów w statystykach, updateStats wszystko przeliczy
-  updateStats();
+  updateStats(); // Odświeżamy widoczne statystyki punktowe
+  loadQuestion(); // Ładujemy pierwsze pytanie od nowa, co zaktualizuje napis "Pytanie 1 z 148"
   console.log('Statystyki testu zostały zresetowane po poprawieniu błędów.');
 }
 function updateStats() {
@@ -1698,10 +1700,39 @@ const openModalBtn = document.getElementById('open-wrong-btn');
 const closeModal = document.getElementById('close-modal');
 const modalQuestionArea = document.getElementById('modal-question-area');
 const modalNextBtn = document.getElementById('modal-next-btn');
+const modalHintBtn = document.getElementById('modal-hint-btn');
 
+modalHintBtn.onclick = () => {
+  const qData = wrongQuestionsPool[currentModalIdx];
+  const correctIndices = qData.c; // Pobieramy indeksy poprawnych odpowiedzi
+
+  // Pobieramy wszystkie kafelki w modalu
+  const cards = modalQuestionArea.querySelectorAll('.answer-card');
+
+  cards.forEach((card, index) => {
+    if (correctIndices.includes(index)) {
+      // Podświetlamy poprawne na delikatny zielony
+      card.style.border = '2px dashed #27ae60';
+      card.style.backgroundColor = '#f0fff4';
+
+      // Opcjonalnie: zaznaczamy checkbox za użytkownika
+      const cb = card.querySelector('input');
+      if (cb) cb.checked = true;
+    }
+  });
+
+  modalHintBtn.innerText = 'Podpowiedziano!';
+  modalHintBtn.disabled = true;
+  modalHintBtn.style.opacity = '0.6';
+};
 let currentModalIdx = 0;
 let isModalChecked = false;
+// RESET PRZYCISKU PODPOWIEDZI
+modalHintBtn.innerText = 'Pokaż poprawne odpowiedzi (Podpowiedź)';
+modalHintBtn.disabled = false;
+modalHintBtn.style.opacity = '1';
 
+modalNextBtn.innerText = 'Sprawdź odpowiedź';
 // Funkcja aktualizująca czerwony przycisk (pokazuje/ukrywa i odświeża licznik)
 function updateWrongBadge() {
   const badge = document.getElementById('wrong-count-badge');
