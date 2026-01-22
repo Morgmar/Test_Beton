@@ -185,7 +185,7 @@ const rawQuestions = [
       'B.     C30/37 dla strunobetonu',
       'C.    C25/30 dla kablobetonu',
     ],
-    c: [1, 2],
+    c: [1],
     img: '',
   },
   {
@@ -424,7 +424,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 42/148\nWspółczynnik tarcia w kanale kablobetonowym przyjmuje się in\nzależności od:',
+    q: 'Pytanie 42/148\nWspółczynnik tarcia w kanale kablobetonowym przyjmuje się w\nzależności od:',
     a: [
       'A.     rodzaju powierzchni cięgna',
       'B.     rodzaju (materiału) rurki osłonowej',
@@ -434,7 +434,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 43/148\nW strunobetonie, po zwolnieniu naciągu cięgien, naprężenia in\nbetonie są:',
+    q: 'Pytanie 43/148\nW strunobetonie, po zwolnieniu naciągu cięgien, naprężenia w\nbetonie są:',
     a: [
       'A.     największe na końcach elementu',
       'B.     stałe na całej długości elementu (poza strefami\nzakotwień)',
@@ -464,7 +464,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 46/148\nKable sprężające bez przyczepności (ang. unbonded) stosuje\nsię głównie in:',
+    q: 'Pytanie 46/148\nKable sprężające bez przyczepności (ang. unbonded) stosuje\nsię głównie w:',
     a: [
       'A.     płaskich stropach budynków kubaturowych',
       'B.     wielkich mostach o rekordowych rozpiętościach',
@@ -494,7 +494,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 49/148\nZjawisko "odsychania" (ang. draw-in) klinów in\nzakotwieniu powoduje:',
+    q: 'Pytanie 49/148\nZjawisko "odsychania" (ang. draw-in) klinów w\nzakotwieniu powoduje:',
     a: [
       'A.     wzrost siły sprężającej',
       'B.     stratę siły sprężającej (doraźną)',
@@ -627,7 +627,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 61/148\nW konstrukcjach strunobetonowych, pozycjonowanie cięgien in\nformie odbywa się za pomocą:',
+    q: 'Pytanie 61/148\nW konstrukcjach strunobetonowych, pozycjonowanie cięgien w\nformie odbywa się za pomocą:',
     a: [
       'A.     płyt rozdzielczych na końcach toru',
       'B.     grzebieni lub specjalnych uchwytów wewnątrz\nformy',
@@ -749,7 +749,7 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 74/148\nStrefa przekazywania siły sprężającej (transmisji) in\nstrunobetonie jest zazwyczaj:',
+    q: 'Pytanie 74/148\nStrefa przekazywania siły sprężającej (transmisji) w\nstrunobetonie jest zazwyczaj:',
     a: [
       'A.     krótsza dla splotów niż dla drutów gładkich o\ntej samej średnicy',
       'B.     dłuższa dla cięgien o większej średnicy',
@@ -1000,7 +1000,7 @@ const rawQuestions = [
     q: 'Pytanie 100/148\nPo zakończeniu sprężania i iniekcji, końcówki cięgien\nwystające z zakotwień:',
     a: [
       'A.     odcina się (najlepiej mechanicznie) i zabezpiecza\nbetonem lub kapturkiem',
-      'B.     zostawia się do ewentualnego dociągu in\nprzyszłości',
+      'B.     zostawia się do ewentualnego dociągu w\nprzyszłości',
       'C.    zagina się pod kątem 90 stopni',
     ],
     c: [0],
@@ -1166,7 +1166,7 @@ const rawQuestions = [
       'A.     kable kotwione w specjalnych pilastrach',
       'B.     kable kotwione w specjalnych gniazdach',
     ],
-    c: [0],
+    c: [1],
     img: '',
   },
   {
