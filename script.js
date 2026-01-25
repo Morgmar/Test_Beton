@@ -886,8 +886,8 @@ const rawQuestions = [
   },
   {
     q: 'Pytanie 88\nMinimalna klasa betonu dla strunobetonu (wg polskich\npraktyk projektowych i EC2) to zazwyczaj:',
-    a: ['A.     C30/37', 'B.     C40/50', 'C.    C20/25'],
-    c: [0, 1],
+    a: ['A. C30/37', 'B. C40/50', 'C. C20/25'],
+    c: [1],
     img: '',
   },
   {
@@ -1159,7 +1159,7 @@ const rawQuestions = [
       'A.     kable umieszczone w grubości ściany rury',
       'B.     kable umieszczone na zewnętrznej powierzchni\nściany rury',
     ],
-    c: [1],
+    c: [0],
     img: '',
   },
   {
@@ -1168,7 +1168,7 @@ const rawQuestions = [
       'A.     kable kotwione w specjalnych pilastrach',
       'B.     kable kotwione w specjalnych gniazdach',
     ],
-    c: [0,1],
+    c: [0, 1],
     img: '',
   },
   {
@@ -1481,7 +1481,7 @@ const rawQuestions = [
   {
     q: 'Pytanie 151\nWymagane pole przekroju półki dolnej belki kablobetonowej Apd\nmożna oszacować, uzależniając je od pola przekroju cięgien sprężających Ap.',
     a: [
-      'A. Apd =< 50 Ap',
+      'A. Apd < 50 Ap',
       'B. Apd =< 40 Ap',
       'C. Apd >= 40 Ap',
       'D. Apd =< 45 Ap',
@@ -1493,7 +1493,7 @@ const rawQuestions = [
   },
   {
     q: 'Pytanie 152\nW Elementach Kablobetonowych mogą wystepować zakotwienia',
-    a: ['A. tylko czynne', 'B. tylko bierne', 'F. Apd =< 50 Ap'],
+    a: ['A. tylko czynne', 'B. tylko bierne', 'C. czynne i bierne'],
     c: [2],
     img: '',
   },
@@ -1822,7 +1822,7 @@ function loadModalQuestion() {
 
   qData.a.forEach((ans, i) => {
     const div = document.createElement('div');
-    div.className = 'answer-card'; // Używamy Twoich stylów kafelków
+    div.className = 'answer-card';
     div.style.display = 'flex';
     div.style.alignItems = 'center';
     div.style.padding = '12px';
@@ -1846,7 +1846,33 @@ function loadModalQuestion() {
   });
 }
 
-// Logika przycisku wewnątrz okna powtórek
+// Logika przycisku podpowiedzi (Hint)
+modalHintBtn.onclick = () => {
+  const qData = wrongQuestionsPool[currentModalIdx];
+  const correctIndices = qData.c;
+  const cards = modalQuestionArea.querySelectorAll('.answer-card');
+
+  cards.forEach((card, index) => {
+    const cb = card.querySelector('input');
+    if (correctIndices.includes(index)) {
+      // Podświetlamy tylko faktycznie poprawne odpowiedzi
+      card.style.border = '2px dashed #27ae60';
+      card.style.backgroundColor = '#f0fff4';
+      if (cb) cb.checked = true;
+    } else {
+      // Czyścimy wszystko inne, co użytkownik mógł zaznaczyć błędnie
+      card.style.border = '1px solid #ddd';
+      card.style.backgroundColor = '#fff';
+      if (cb) cb.checked = false;
+    }
+  });
+
+  modalHintBtn.innerText = 'Podpowiedziano!';
+  modalHintBtn.disabled = true;
+  modalHintBtn.style.opacity = '0.6';
+};
+
+// Logika przycisku "Dalej" wewnątrz okna powtórek
 modalNextBtn.onclick = () => {
   const qData = wrongQuestionsPool[currentModalIdx];
 
@@ -1860,12 +1886,10 @@ modalNextBtn.onclick = () => {
       selected.every(val => qData.c.includes(val));
 
     if (isCorrect) {
-      // DOBRA ODPOWIEDŹ -> usuwamy z listy błędów
       wrongQuestionsPool.splice(currentModalIdx, 1);
       modalQuestionArea.innerHTML += `<div style="color: #27ae60; font-weight: bold; margin-top: 15px; text-align: center;">✔ Dobrze! Pytanie usunięte z listy błędów.</div>`;
       if (currentModalIdx >= wrongQuestionsPool.length) currentModalIdx = 0;
     } else {
-      // BŁĄD -> pytanie zostaje, idziemy do następnego w kolejce
       currentModalIdx = (currentModalIdx + 1) % wrongQuestionsPool.length;
       modalQuestionArea.innerHTML += `<div style="color: #e74c3c; font-weight: bold; margin-top: 15px; text-align: center;">✖ Nadal błąd! Pytanie wróci do Ciebie w tej pętli.</div>`;
     }
@@ -1877,11 +1901,7 @@ modalNextBtn.onclick = () => {
   } else {
     if (wrongQuestionsPool.length === 0) {
       modal.style.display = 'none';
-
-      // --- NOWA LOGIKA RESETU ---
       resetMainStats();
-      // --------------------------
-
       alert(
         'Gratulacje! Wszystkie błędy poprawione. Statystyki główne zostały wyzerowane.',
       );
