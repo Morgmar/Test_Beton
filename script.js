@@ -14,9 +14,9 @@ const rawQuestions = [
   {
     q: 'Pytanie 2 \nSprężanie termiczne rur jest najczęściej stosowane:',
     a: [
-      'A. przy usuwaniu skutków awarii rurociągów',
-      'B. przy masowej produkcji elementów',
-      'C. wyłącznie w zakładach prefabrykacji',
+      'A. przy usuwaniu skutków awarii rurociągów',
+      'B. przy masowej produkcji elementów',
+      'C. wyłącznie w zakładach prefabrykacji',
       'D. przy wzmacnianiu istniejących konstrukcji',
     ],
     c: [0, 3],
@@ -717,17 +717,17 @@ const rawQuestions = [
     q: 'Pytanie 71 \nEurokod 2 (EC2) określa … relaksacji stali:',
     a: ['A. jedną klasę', 'B. dwie klasy', 'C. trzy klasy', 'D. cztery klasy'],
     c: [2],
-    img: 'images/71.png',
+    img: '',
   },
   {
-    q: 'Pytanie 72 \nPrzedstawiony powyżej wzór pozwala obliczyć doraźne ugięcie od sprężania w przypadku dźwigara o:',
+    q: 'Pytanie 72 \nPrzedstawiony poniżej wzór pozwala obliczyć doraźne ugięcie od sprężania w przypadku dźwigara o:',
     a: [
       'A. stałym przekroju i prostoliniowej trasie cięgien',
       'B. zmiennym przekroju (dźwigar dwuspadowy) i prostoliniowej trasie cięgien',
       'C. stałym przekroju i parabolicznej trasie cięgien',
     ],
     c: [0],
-    img: '',
+    img: 'images/72.png',
   },
   {
     q: 'Pytanie 73 \nDo strat siły sprężającej w konstrukcjach strunobetonowych zalicza się:',
@@ -1158,7 +1158,7 @@ const rawQuestions = [
   {
     q: 'Pytanie 114 \nW rurach o bardzo dużych średnicach stosuje się:',
     a: ['A. kable pełnoobwodowe', 'B. kable odcinkowe'],
-    c: [1],
+    c: [0, 1],
     img: '',
   },
   {
