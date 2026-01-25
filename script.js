@@ -19,7 +19,7 @@ const rawQuestions = [
       'C.    wyłącznie w zakładach prefabrykacji',
       'D.    przy wzmacnianiu istniejących konstrukcji',
     ],
-    c: [1, 2],
+    c: [0, 3],
     img: '',
   },
   {
