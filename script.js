@@ -1168,7 +1168,7 @@ const rawQuestions = [
       'A.     kable kotwione w specjalnych pilastrach',
       'B.     kable kotwione w specjalnych gniazdach',
     ],
-    c: [1],
+    c: [0,1],
     img: '',
   },
   {
@@ -1468,7 +1468,7 @@ const rawQuestions = [
   {
     q: 'Pytanie 150\nWymagane pole przekroju półki dolnej belki strunobetonowej Apd\nmożna oszacować, uzależniając je od pola przekroju cięgien sprężających Ap.',
     a: [
-      'A. Apd =< 50 Ap',
+      'A. Apd < 50 Ap',
       'B. Apd =< 40 Ap',
       'C. Apd >= 40 Ap',
       'D. Apd =< 45 Ap',
