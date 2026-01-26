@@ -1521,16 +1521,28 @@ function resetMainStats() {
   console.log('Statystyki testu zostały zresetowane po poprawieniu błędów.');
 }
 function updateStats() {
-  correctSpan.innerText = correctCount;
-  wrongSpan.innerText = wrongCount;
+  const cEl = document.getElementById('correct-count');
+  const wEl = document.getElementById('wrong-count');
+  const pEl = document.getElementById('score-percentage');
 
-  // OBLICZANIE PROCENTU: Poprawne / Suma udzielonych odpowiedzi
-  const totalAnswered = correctCount + wrongCount;
-  const percentage =
-    totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+  if (cEl) cEl.innerText = correctCount;
+  if (wEl) wEl.innerText = wrongCount;
 
-  if (scoreSpan) {
-    scoreSpan.innerText = percentage + '%';
+  if (pEl) {
+    // Obliczamy sumę pytań na których udzielono odpowiedzi
+    const sumaPytan = correctCount + wrongCount;
+
+    if (sumaPytan > 0) {
+      // Formuła: (Poprawne - Błędne) / Wszystkie udzielone * 100
+      let wynik = (correctCount / sumaPytan) * 100;
+
+      // Zabezpieczenie przed wynikiem ujemnym
+      if (wynik < 0) wynik = 0;
+
+      pEl.innerText = Math.round(wynik) + '%';
+    } else {
+      pEl.innerText = '0%';
+    }
   }
 }
 function renderImage(qData) {
