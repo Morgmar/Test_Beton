@@ -1103,7 +1103,7 @@ const rawQuestions = [
       'B. kabla specjalnego',
       'C. kabla wielodrutowego',
     ],
-    c: [2],
+    c: [1],
     img: '',
   },
   {
