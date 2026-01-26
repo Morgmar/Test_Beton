@@ -204,21 +204,35 @@
 
       /* 2. Poprawka dla telefonów - wewnątrz Twojego istniejącego @media (max-width: 1100px) */
       @media (max-width: 1100px) {
-        /* ... Twoje poprzednie style dla paska bocznego i statystyk ... */
-
-        #flash-counter-btn {
-          position: relative; /* Przestaje "pływać" nad innymi elementami */
-          bottom: 0;
-          left: 0;
-          margin: 10px auto 20px auto; /* Centrowanie i margines pod przyciskiem */
-          width: 95%; /* Rozciągnięcie na szerokość ekranu jak inne karty */
+        /* To sprawi, że kafelki z terminami przestaną zasłaniać pytanie */
+        #exam-sidebar {
+          position: static !important; /* Wyłącza fixed position */
+          width: 95%;
+          margin: 20px auto; /* Centruje pasek pod quizem */
           display: block;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        #exam-sidebar {
-          order: 2; /* Ustawia terminy pod przyciskiem, jeśli używasz flexboxa */
-          margin-top: 10px;
+        /* To sprawi, że statystyki też nie będą niczego zasłaniać */
+        #stats-container {
+          position: static !important; /* Wyłącza fixed position */
+          width: 95%;
+          margin: 10px auto;
+          min-width: 0;
+          box-sizing: border-box;
+        }
+
+        /* Przycisk fiszek i kafelki - ujednolicenie wymiarów */
+        #flash-counter-btn,
+        .info-card {
+          width: 100%;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          box-sizing: border-box;
+          display: block;
+          position: relative;
+          left: 0;
+          bottom: 0;
         }
       }
     </style>
