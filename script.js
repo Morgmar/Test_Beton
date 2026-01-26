@@ -390,7 +390,7 @@ const rawQuestions = [
       'D. kable ze splotów',
       'E. kable linowe',
     ],
-    c: [1],
+    c: [0, 1],
     img: '',
   },
   {
@@ -1367,7 +1367,7 @@ const rawQuestions = [
       'B. tak, by środek ciężkości cięgien pokrywał się ze środkiem ciężkości półki dolnej (w miarę możliwości)',
       'C. przy zachowaniu nieparzystej liczby kolumn',
     ],
-    c: [0, 1],
+    c: [0, 1, 2],
     img: '',
   },
   {
@@ -1531,10 +1531,12 @@ function updateStats() {
   if (pEl) {
     // Obliczamy sumę pytań na których udzielono odpowiedzi
     const sumaPytan = correctCount + wrongCount;
+    console.log(correctCount, wrongCount, sumaPytan);
 
     if (sumaPytan > 0) {
       // Formuła: (Poprawne - Błędne) / Wszystkie udzielone * 100
-      let wynik = ((correctCount - wrongCount) / sumaPytan) * 100;
+      let wynik =
+        ((correctCount - wrongCount) / (correctCount + wrongCount)) * 100;
 
       // Zabezpieczenie przed wynikiem ujemnym
       if (wynik < 0) wynik = 0;
