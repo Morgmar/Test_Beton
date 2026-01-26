@@ -1765,11 +1765,11 @@ modalHintBtn.onclick = () => {
 let currentModalIdx = 0;
 let isModalChecked = false;
 // RESET PRZYCISKU PODPOWIEDZI
-modalHintBtn.innerText = 'Pokaż poprawne odpowiedzi (Podpowiedź)';
+modalHintBtn.innerText = 'Podpowiedź';
 modalHintBtn.disabled = false;
 modalHintBtn.style.opacity = '1';
 
-modalNextBtn.innerText = 'Sprawdź odpowiedź';
+modalNextBtn.innerText = 'Sprawdź/Dalej';
 // Funkcja aktualizująca czerwony przycisk (pokazuje/ukrywa i odświeża licznik)
 function updateWrongBadge() {
   const badge = document.getElementById('wrong-count-badge');
@@ -1810,9 +1810,11 @@ function loadModalQuestion() {
         <div style="color: #e74c3c; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
             TRYB POWTÓRKI: Zostało ${wrongQuestionsPool.length} pytań
         </div>
-        <h3 style="margin-bottom: 20px;">${qData.q}</h3>
+        <h3 style="margin-bottom: 20px;">${qData.q.replace(/\n/g, '<br>')}</h3>
     `;
 
+  // Renderujemy odpowiedzi dokładnie w kolejności z tablicy qData.a
+  // i przypisujemy im oryginalne indeksy (i)
   qData.a.forEach((ans, i) => {
     const div = document.createElement('div');
     div.className = 'answer-card';
@@ -1834,6 +1836,7 @@ function loadModalQuestion() {
       const cb = div.querySelector('input');
       cb.checked = !cb.checked;
       div.style.backgroundColor = cb.checked ? '#eef6ff' : '#fff';
+      div.style.borderColor = cb.checked ? '#3498db' : '#ddd';
     };
     modalQuestionArea.appendChild(div);
   });
@@ -1900,7 +1903,99 @@ modalNextBtn.onclick = () => {
       );
     } else {
       if (currentModalIdx >= wrongQuestionsPool.length) currentModalIdx = 0;
+      if (document.getElementById('add-flash-modal')) {
+        document.getElementById('add-flash-modal').style.display = 'block';
+      }
       loadModalQuestion();
     }
   }
 };
+// --- SILNIK FISZEK - INTEGRACJA ---
+let flashcards = JSON.parse(localStorage.getItem('user_flashcards')) || [];
+
+function updateFlashBadge() {
+  const badge = document.getElementById('flash-badge');
+  if (badge) badge.innerText = flashcards.length;
+}
+
+// Obsługa dodawania (wywoływana przez addEventListener)
+function handleAddFlash(type) {
+  let qData =
+    type === 'main'
+      ? questions[currentQuestionIndex]
+      : wrongQuestionsPool[currentModalIdx];
+  if (!qData) return;
+
+  if (flashcards.some(f => f.q === qData.q)) {
+    alert('To pytanie już jest w fiszkach.');
+    return;
+  }
+
+  flashcards.push({
+    q: qData.q,
+    a: 'POPRAWNE:\n' + qData.c.map(i => qData.a[i]).join('\n'),
+  });
+  updateFlashBadge();
+  alert('Dodano!');
+}
+
+// Podpięcie zdarzeń pod przyciski (musi być na końcu)
+document
+  .getElementById('add-flash-main')
+  .addEventListener('click', function () {
+    handleAddFlash('main');
+  });
+
+if (document.getElementById('add-flash-modal')) {
+  document
+    .getElementById('add-flash-modal')
+    .addEventListener('click', function () {
+      handleAddFlash('modal');
+    });
+}
+
+// Obsługa modalu przeglądania
+document.getElementById('flash-counter-btn').onclick = function () {
+  if (flashcards.length === 0) return alert('Brak fiszek.');
+  currentFlashIdx = 0;
+  renderFlash();
+  document.getElementById('flash-modal').style.display = 'flex';
+};
+
+let currentFlashIdx = 0;
+function renderFlash() {
+  document.getElementById('flash-front-txt').innerText =
+    flashcards[currentFlashIdx].q;
+  document.getElementById('flash-back-txt').innerText =
+    flashcards[currentFlashIdx].a;
+  document.getElementById('flash-inner-wrap').classList.remove('is-flipped');
+}
+
+document.getElementById('flash-card-trigger').onclick = function () {
+  document.getElementById('flash-inner-wrap').classList.toggle('is-flipped');
+};
+
+document.getElementById('flash-next-btn').onclick = function (e) {
+  e.stopPropagation();
+  currentFlashIdx = (currentFlashIdx + 1) % flashcards.length;
+  renderFlash();
+};
+
+document.getElementById('flash-del-btn').onclick = function (e) {
+  e.stopPropagation();
+  flashcards.splice(currentFlashIdx, 1);
+  localStorage.setItem('user_flashcards', JSON.stringify(flashcards));
+  updateFlashBadge();
+  if (flashcards.length === 0)
+    document.getElementById('flash-modal').style.display = 'none';
+  else {
+    currentFlashIdx %= flashcards.length;
+    renderFlash();
+  }
+};
+
+document.getElementById('close-flash').onclick = function () {
+  document.getElementById('flash-modal').style.display = 'none';
+};
+
+updateFlashBadge();
