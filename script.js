@@ -1534,7 +1534,7 @@ function updateStats() {
 
     if (sumaPytan > 0) {
       // Formuła: (Poprawne - Błędne) / Wszystkie udzielone * 100
-      let wynik = (correctCount / sumaPytan) * 100;
+      let wynik = ((correctCount - wrongCount) / sumaPytan) * 100;
 
       // Zabezpieczenie przed wynikiem ujemnym
       if (wynik < 0) wynik = 0;
