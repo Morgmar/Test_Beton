@@ -1003,7 +1003,7 @@ const rawQuestions = [
       'C. naciąg cięgien wykonuje się przed betonowaniem elementu',
       'D. przekazanie siły sprężającej na beton następuje poprzez docisk',
     ],
-    c: [0, 1, 2],
+    c: [0, 2],
     img: '',
   },
   {
