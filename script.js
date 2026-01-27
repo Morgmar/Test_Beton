@@ -264,7 +264,7 @@ const rawQuestions = [
       'C. straty od częściowej relaksacji stali',
       'D. straty od poślizgu w uchwytach technologicznych',
     ],
-    c: [1],
+    c: [1, 2],
     img: '',
   },
   {
@@ -551,7 +551,7 @@ const rawQuestions = [
       'C. niebezpiecznym (w 1/3 lub ¼ rozpiętości belki)',
       'D. w miejscu żebra usztywniającego środnik',
     ],
-    c: [1],
+    c: [0, 1],
     img: '',
   },
   {
