@@ -1487,7 +1487,7 @@ const rawQuestions = [
       'C. szerokość przekroju dźwigara',
       'D. charakterystyczny moment zginający w rozpatrywanym przekroju',
     ],
-    c: [1, 2],
+    c: [1, 0],
     img: '',
   },
 ];
