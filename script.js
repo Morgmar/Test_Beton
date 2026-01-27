@@ -257,18 +257,6 @@ const rawQuestions = [
     img: '',
   },
   {
-    q: 'Pytanie 6 Sprawdzając warunek pojawienia się rys ukośnych w belce sprężonej o przekroju dwuteowym, sprawdza się naprężenia we włóknach:',
-    a: [
-      'A.	transferu',
-      'B. dystrybucji',
-      'C. transmisji',
-      'D. dyspersji',
-      'E. zakotwienia',
-    ],
-    c: [3],
-    img: '',
-  },
-  {
     q: 'Pytanie 26 \nDo strat siły sprężającej w konstrukcjach kablobetonowych zalicza się:',
     a: [
       'A. straty od różnicy temperatury',
@@ -1670,7 +1658,9 @@ nextBtn.onclick = () => {
     if (currentIdx < questions.length) {
       loadQuestion();
     } else {
-      const finalScore = Math.round((correctCount / questions.length) * 100);
+      const finalScore = Math.round(
+        ((correctCount - wrongCount) / questions.length) * 100,
+      );
       questionArea.innerHTML = `
                 <div style="text-align: center; padding: 40px;">
                     <h2>Test zakończony!</h2>
